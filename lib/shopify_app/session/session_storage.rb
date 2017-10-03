@@ -12,18 +12,21 @@ module ShopifyApp
     end
 
     class_methods do
-      def store(session)
-        shop = self.find_or_initialize_by(shopify_domain: session.url)
-        shop.shopify_token = session.token
-        shop.save!
-        shop.id
+      def store(session, company)
+        if company
+          store = self.find_or_initialize_by(shopify_domain: session.url)
+          store.company = company
+          store.shopify_token = session.token
+          store.save!
+          store.id
+        end
       end
 
       def retrieve(id)
         return unless id
 
-        if shop = self.find_by(id: id)
-          ShopifyAPI::Session.new(shop.shopify_domain, shop.shopify_token)
+        if store = self.find_by(id: id)
+          ShopifyAPI::Session.new(store.shopify_domain, store.shopify_token)
         end
       end
     end
