@@ -15,6 +15,7 @@ module ShopifyApp
       def store(session, company)
         if company
           store = self.find_or_initialize_by(shopify_domain: session.url)
+          store.name = 'Sample store'
           store.company = company
           store.shopify_token = session.token
           store.save!
