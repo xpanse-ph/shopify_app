@@ -15,8 +15,8 @@ module ShopifyApp
         storage.retrieve(id)
       end
 
-      def store(session)
-        storage.store(session)
+      def store(session, company)
+        storage.store(session, company)
       end
 
       def storage
