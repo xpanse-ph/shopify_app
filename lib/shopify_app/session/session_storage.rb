@@ -4,7 +4,7 @@ module ShopifyApp
 
     included do
       validates :shopify_domain, presence: true, uniqueness: true
-      validates :shopify_token
+      # validates :shopify_token
     end
 
     def with_shopify_session(&block)
