@@ -4,7 +4,7 @@ module ShopifyApp
 
     included do
       validates :shopify_domain, presence: true, uniqueness: true
-      validates :shopify_token, presence: true
+      validates :shopify_token
     end
 
     def with_shopify_session(&block)
@@ -12,10 +12,10 @@ module ShopifyApp
     end
 
     class_methods do
-      def store(session, company)
+      def store(session, company, company_name)
         if company
           store = self.find_or_initialize_by(shopify_domain: session.url)
-          store.name = 'Sample store'
+          store.name = company_name
           store.company = company
           store.shopify_token = session.token
           store.save!
