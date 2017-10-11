@@ -14,12 +14,13 @@ module ShopifyApp
     class_methods do
       def store(session, company, company_name)
         if company
-          store = self.find_or_initialize_by(shopify_domain: session.url)
-          store.name = company_name
-          store.company = company
-          store.shopify_token = session.token
-          store.save!
-          store.id
+          store = self.find_or_initialize_by(shopify_domain: session.url) do |shop|
+            shop.name = company_name
+            shop.company = company
+            shop.shopify_token = session.token
+            shop.save!
+          end
+          return store.id
         end
       end
 
