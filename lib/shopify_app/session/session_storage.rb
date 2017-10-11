@@ -17,9 +17,9 @@ module ShopifyApp
           store = self.find_or_initialize_by(shopify_domain: session.url) do |shop|
             shop.name = company_name
             shop.company = company
-            shop.shopify_token = session.token
-            shop.save!
           end
+          shop.shopify_token = session.token
+          shop.save!
           return store.id
         end
       end
