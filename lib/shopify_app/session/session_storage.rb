@@ -18,8 +18,8 @@ module ShopifyApp
             shop.name = company_name
             shop.company = company
           end
-          shop.shopify_token = session.token
-          shop.save!
+          store.shopify_token = session.token
+          store.save!
           return store.id
         end
       end
